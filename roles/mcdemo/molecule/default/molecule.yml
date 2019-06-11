@@ -1,0 +1,24 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: openstack
+lint:
+  name: yamllint
+platforms:
+  - name: instance-1
+    image: "GNU/Linux Ubuntu Server 16.04 Xenial Xerus x64"
+    flavor: e3standard.x1
+provisioner:
+  name: ansible
+  options:
+    diff: True
+    v: True
+  playbooks:
+    create: create.yml
+    prepare: prepare.yml
+    destroy: destroy.yml
+scenario:
+  name: default
+verifier:
+  name: goss

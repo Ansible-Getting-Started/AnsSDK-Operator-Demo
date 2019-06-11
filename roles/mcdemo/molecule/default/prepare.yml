@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install python for Ansible
+      raw: until [[ -f /var/lib/cloud/instance/boot-finished ]]; do sleep 1; done && test -e /usr/bin/python || (apt-get -y update && apt-get install -y python-minimal python-zipstream)
+      args:
+        executable: /bin/bash
+      become: true
+      changed_when: false
